@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<!-- 
+		定义一个公共的package，用于封装公共的配置，
+		使业务模块对应的package去继承，从而可以复用
+		这些配置。
+	-->
+	<package name="common" extends="json-default">
+		<interceptors>
+			<!-- 自定义拦截器，在于对网页是否超时作出处理 -->
+			<interceptor name="checkPageTimeout" 
+				class="com.ocs.interceptors.CheckPageTimeoutInterceptor"/>
+			
+			<!-- 自定义拦截器，对系统访问权限进行处理 -->
+			<interceptor name="checkHasPrivilege"
+				class="com.ocs.interceptors.CheckHasPrivilegeInterceptor" />
+			
+			<!-- 注册拦截器栈 -->
+			<interceptor-stack name="customStack">
+				<interceptor-ref name="checkPageTimeout"/>
+				
+				<interceptor-ref name="checkHasPrivilege"/>
+				
+				<!-- 包含默认拦截器，保证struts某些自动化操作不出错 -->
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+			
+		</interceptors>
+		
+		<!-- 
+			设置默认的拦截器引用，Struts2默认引用
+			的拦截器是defaultStack，这里将其修改
+			为自己定义的拦截器 
+		-->
+		<default-interceptor-ref name="customStack"/>
+		
+		<!-- 定义全局Result，里面包含的Result，可以
+		被当前包下所有的Action直接访问，而不需要
+		在Action下进行定义 -->
+		<global-results>
+			<!-- 网页超时 -->
+			<result name="pageTimeout" type="redirectAction">
+				<param name="namespace">
+					/login
+				</param>
+				<param name="actionName">
+					login_toLogin
+				</param>
+			</result>
+			
+			<!-- 没有访问权限 -->
+			<result name="noPermission" type="redirectAction">
+				<param name="namespace">
+					/common
+				</param>
+				<param name="actionName">
+					common_toNoPermission
+				</param>
+			</result>
+		</global-results>
+		
+		<action name="common_*" class="commonAction"
+			method="{1}">
+			<!-- 跳转到修改用户个人信息页面 -->
+			<result name="toUpdateUserInfoSuccess">
+				/WEB-INF/main/infoModi.jsp
+			</result>
+			
+			<!-- 修改用户个人信息 -->
+			<result name="updateUserInfoSuccess">
+				/WEB-INF/main/index.jsp
+			</result>
+			
+			<!-- 跳转到修改密码页面 -->
+			<result name="toResetPasswordSuccess">
+				/WEB-INF/main/resetPasswd.jsp
+			</result>
+						
+			<!-- 重置用户密码 -->
+			<result name="resetUserPasswordSuccess">
+				/WEB-INF/main/index.jsp
+			</result>
+			
+			<!-- 退出系统 ，跳回首页-->
+			<result name="exitSuccess" type="redirectAction">
+				<param name="namespace">
+					/login
+				</param>
+				<param name="actionName">
+					login_toLogin
+				</param>
+			</result>
+			
+			<!-- 跳转到首页 -->
+			<result name="toIndex">
+				/WEB-INF/main/index.jsp
+			</result>
+			
+			<!-- 跳转到无权限页面 -->
+			<result name="toNoPermission">
+				/WEB-INF/main/noPermission.jsp
+			</result>
+			
+			<!-- 错误 -->
+			<result name="error">
+				/WEB-INF/main/error.jsp
+			</result>
+		</action>
+	</package>
+</struts>

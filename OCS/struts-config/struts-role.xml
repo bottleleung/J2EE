@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<!-- 角色管理模块 -->
+	<package name="role" namespace="/role" extends="common">
+		<action name="role_*" class="roleAction"
+				method="{1}">
+			<!-- 页面的最大数据容量 -->
+			<param name="pageSize">5</param>
+			
+			<!-- 分页查询成功 -->
+			<result name="findSuccess">
+				/WEB-INF/role/roleList.jsp
+			</result>
+			
+			<!-- 跳转到修改role页面 -->
+			<result name="toUpdateRoleSuccess">
+				/WEB-INF/role/roleModi.jsp
+			</result>
+			
+			<!-- 修改role -->
+			<result name="updateSuccess" type="redirectAction">
+				role_find
+			</result>
+			
+			<!-- 跳转到增加role页面 -->
+			<result name="toAddRole">
+				/WEB-INF/role/roleAdd.jsp
+			</result>
+			
+			<!-- 增加role -->
+			<result name="addSuccess" type="redirectAction">
+				role_find
+			</result>
+			
+			<!-- 删除role -->
+			<result name="deleteSuccess" type="redirectAction">
+				role_find
+			</result>
+			
+			<!-- 错误 -->
+			<result name="error">
+				/WEB-INF/main/error.jsp
+			</result>
+			
+			<!-- 检查角色名字是否重复 -->
+			<result name="checkRoleNameRepeatSuccess" type="json">
+				<param name="root">isRoleNameRepeat</param>
+			</result>
+		</action>
+	</package>
+</struts>

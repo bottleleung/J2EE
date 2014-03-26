@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<!-- 资费模块 -->
+	<package name="cost" namespace="/cost" extends="common">		
+		<!-- 采用通配符匹配不同的方法 -->
+		<action name="cost_*" class="costAction" method="{1}">
+			<!-- 设置每页显示5条数据 -->
+			<param name = "pageSize">5</param>
+			
+			<!-- 分页查询成功 -->
+			<result name="findSuccess">
+				/WEB-INF/cost/costList.jsp
+			</result>
+			
+			<!-- 这是用于新建资费时异步检查输入资费名字在数据库中是否已存在 -->
+			<result name="costChecked" type="json">
+				<param name="root">isCostRepeat</param>
+			</result>
+			
+			<!-- 删除cost成功 -->
+			<result name="deleteSuccess" type="redirectAction">
+				cost_find
+			</result>
+			
+			<!-- 添加cost成功 -->
+			<result name="addSuccess" type="redirectAction">
+				cost_find
+			</result>
+			
+			<!-- 跳转到新增cost页面 -->
+			<result name="toAddCost">
+				/WEB-INF/cost/costAdd.jsp
+			</result>
+			
+			<!-- 跳转到修改cost页面 -->
+			<result name="toUpdateCostSuccess">
+				/WEB-INF/cost/costModi.jsp
+			</result>
+			
+			<!-- 修改cost成功 -->
+			<result name="updateCostSuccess" type="redirectAction">
+				cost_find
+			</result>
+			
+			<!-- 资费是否开通成功 -->
+			<result name="startSuccess" type="redirectAction">
+				cost_find
+			</result>
+						
+			<!-- 查看cost详细信息 -->
+			<result name="findDetailSuccess">
+				/WEB-INF/cost/costDetail.jsp
+			</result>
+			
+			<!-- 错误 -->
+			<result name="error">
+				/WEB-INF/main/error.jsp
+			</result>
+		</action>		
+	</package>
+</struts>

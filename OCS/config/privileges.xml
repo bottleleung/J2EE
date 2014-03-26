@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<privileges>
+	<privilege id="1">
+		<name>角色管理</name>
+		<urls>
+			<url>/role_find</url>
+			<url>/role_toUpdateRole</url>
+			<url>/role_checkRoleNameRepeat</url>
+			<url>/role_toAddRole</url>
+			<url>/role_update</url>
+			<url>/role_add</url>
+			<url>/role_delete</url>
+		</urls>
+	</privilege>
+	<privilege id="2">
+		<name>用户管理</name>
+		<urls>
+			<url>/user_find</url>
+			<url>/user_checkNameRepeat</url>
+			<url>/user_checkTelephoneRepeat</url>
+			<url>/user_delete</url>
+			<url>/user_toAddUser</url>
+			<url>/user_add</url>
+			<url>/user_toUpdateUser</url>
+			<url>/user_checkUserCodeRepeat</url>
+			<url>/user_update</url>
+		</urls>
+	</privilege>
+	<privilege id="3">
+		<name>资费管理</name>
+		<urls>
+			<url>/cost_start</url>
+			<url>/cost_toAddCost</url>
+			<url>/cost_updateCost</url>
+			<url>/cost_toUpdateCost</url>
+			<url>/cost_find</url>
+			<url>/cost_checkCostRepeat</url>
+			<url>/cost_delete</url>
+			<url>/cost_add</url>
+			<url>/cost_toCostDetail</url>
+		</urls>
+	</privilege>
+	<privilege id="4">
+		<name>账务账号</name>
+		<urls>
+			<url>/account_find</url>
+			<url>/account_checkRealName</url>
+			<url>/account_checkIdCardNo</url>
+			<url>/account_checkLoginName</url>
+			<url>/account_checkTelephone</url>
+			<url>/account_checkRecommenderExist</url>
+			<url>/account_start</url>
+			<url>/account_pause</url>
+			<url>/account_delete</url>
+			<url>/account_toAddAccount</url>
+			<url>/account_toUpdateAccount</url>
+			<url>/account_detail</url>
+			<url>/account_add</url>
+			<url>/account_findRecommenderId</url>
+			<url>/account_update</url>
+		</urls>
+	</privilege>
+	<privilege id="5">
+		<name>业务账号</name>
+		<urls>
+			<url>/business_find</url>
+			<url>/business_start</url>
+			<url>/business_pause</url>
+			<url>/business_isAccountPauseOrDelete</url>
+			<url>/business_add</url>
+			<url>/business_checkBusinessRepeat</url>
+			<url>/business_checkIdCardNoExist</url>
+			<url>/business_findAccount</url>
+			<url>/business_delete</url>
+			<url>/business_toAddBusiness</url>
+			<url>/business_toUpdateBusiness</url>
+			<url>/business_update</url>
+		</urls>
+	</privilege>
+</privileges>

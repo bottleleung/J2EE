@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<!-- 账户账号模块 -->
+	<package name="account" namespace="/account" extends="common">
+		<action name="account_*" class="accountAction" method="{1}">
+			<!-- 设置每页显示5条数据 -->
+			<param name = "pageSize">5</param>
+			
+			<!-- 按条件查询成功 -->
+			<result name="findSuccess">
+				/WEB-INF/account/accountList.jsp
+			</result>
+			
+			<!-- 开通账务账号-->
+			<result name="startSuccess" type="redirectAction">
+				account_find
+			</result>
+			
+			<!-- 检查推荐人是否存在，异步检查 -->
+			<result name="isRecommenderExist" type="json">
+				<param name="root">isRecommenderExist</param>
+			</result>
+			
+			<!-- 跳转到增加account界面 -->
+			<result name="toAddAccount">
+				/WEB-INF/account/accountAdd.jsp
+			</result>
+			
+			<!-- 增加一个账务账号数据 -->
+			<result name="addSuccess" type="redirectAction">
+				account_find
+			</result>
+			
+			<!-- 跳转到修改账户账号模块页面成功 -->
+			<result name="toUpdateAccountSuccess">
+				/WEB-INF/account/accountUpdate.jsp
+			</result>
+			
+			<!-- 修改一个账户账号数据 -->
+			<result name="updateSuccess" type="redirectAction">
+				account_find
+			</result>
+			
+			<!-- 暂停一个账户账号数据 -->
+			<result name="pauseSuccess" type="redirectAction">
+				account_find
+			</result>
+			
+			<!-- 删除一个账户账号数据 -->
+			<result name="isDeleteSuccess" type="json">
+				<param name="root">isDeleteSuccess</param>
+			</result>
+			
+			<!-- 查看账户账号详情 -->
+			<result name="findDetailSuccess">
+				/WEB-INF/account/accountDetail.jsp
+			</result>
+						
+			<!-- 出现错误 -->
+			<result name="error">
+				/WEB-INF/main/error.jsp
+			</result>
+			
+			<!-- 检查真实姓名是否存在 -->
+			<result name="findRealNameSuccess" type="json">
+				<param name="root">isRealNameExist</param>
+			</result>
+			
+			<!-- 检查身份证是否存在 -->
+			<result name="findIdCardNoSuccess" type="json">
+				<param name="root">isIdCardNoExist</param>
+			</result>
+			
+			<!-- 检查登录名是否存在 -->
+			<result name="findLoginNameSuccess" type="json">
+				<param name="root">isLoginNameExist</param>
+			</result>
+			
+			<!-- 检查真实姓名是否存在 -->
+			<result name="findTelephoneSuccess" type="json">
+				<param name="root">isTelephoneExist</param>
+			</result>
+			
+			<!-- 根据身份证查找推荐人id -->
+			<result name="findRecommenderIdSuccess" type="json">
+				<param name="root">id</param>
+			</result>
+		</action>
+	</package>
+</struts>

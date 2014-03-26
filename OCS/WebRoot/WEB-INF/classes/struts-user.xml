@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<!-- 用户管理模块 -->
+	<package name="user" namespace="/user" extends="common">
+		<action name="user_*" class="UserAction" method="{1}">
+			<param name="pageSize">5</param>
+			
+			<!-- 查找用户数据成功 -->
+			<result name="findSuccess">
+				/WEB-INF/user/userList.jsp
+			</result>
+			
+			<!-- 删除用户 -->
+			<result name="deleteSuccess" type="redirectAction">
+				user_find
+			</result>
+			
+			<!-- 跳转到新增用户页面 -->
+			<result name="toAddUserSuccess">
+				/WEB-INF/user/userAdd.jsp
+			</result>
+			
+			<!-- 新建用户 -->
+			<result name="addSuccess" type="redirectAction">
+				user_find
+			</result>
+			
+			<!-- 跳转到修改用户页面 -->
+			<result name="toUpdateUserSuccess">
+				/WEB-INF/user/userModi.jsp
+			</result>
+			
+			<!-- 修改用户 -->
+			<result name="updateSuccess" type="redirectAction">
+				user_find
+			</result>
+			
+			<!-- 错误 -->
+			<result name="error">
+				/WEB-INF/main/error.jsp
+			</result>
+			
+			<!-- 检查用户姓名是否重复 -->
+			<result name="checkNameRepeatSuccess" type="json">
+				<param name="root">isUserNameRepeat</param>
+			</result>
+			
+			<!-- 检查用户手机号码是否重复 -->
+			<result name="checkTelephoneRepeatSuccess" type="json">
+				<param name="root">isTelephoneRepeat</param>
+			</result>
+			
+			<!-- 检查用户账号是否重复 -->
+			<result name="checkUserCodeRepeatSuccess" type="json">
+				<param name="root">isUserCodeRepeat</param>
+			</result>
+		</action>
+	</package>	
+</struts>

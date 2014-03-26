@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<!-- 业务账号模块 -->
+	<package name="business" namespace="/business" extends="common">
+		<!-- 采用通配符匹配不同方法 -->
+		<action name="business_*" class="businessAction" method="{1}">
+			<!-- 每页显示5条数据 -->
+			<param name="pageSize">5</param>
+			
+			<!-- 查找business数据成功 -->
+			<result name="findSuccess">
+				/WEB-INF/business/businessList.jsp
+			</result>
+			
+			<!-- 跳转到增加业务账号页面 -->
+			<result name="toAddBusinessSuccess">
+				/WEB-INF/business/businessAdd.jsp
+			</result>
+			
+			<!-- 判断身份证号是否存在 -->
+			<result name="checkIdCardNoExistSuccess" type="json">
+				<param name="root">isIdCardNoExist</param>
+			</result>
+			
+			<!-- 根据身份证号查找账户账号 -->
+			<result name="findAccountSuccess" type="json">
+				<param name="root">account</param>
+			</result> 
+			
+			<!-- 添加业务账号成功 -->
+			<result name="addSuccess" type="redirectAction">
+				business_find
+			</result> 
+			
+			<!-- 检查新建的业务账号是否重复 -->
+			<result name="checkBusinessRepeatSuccess" type="json">
+				<param name="root">isBusinessRepeat</param>
+			</result>
+			
+			<!-- 跳转到修改业务账号页面 -->
+			<result name="toUpdateBusinessSuccess">
+				/WEB-INF/business/businessModi.jsp
+			</result>
+			
+			<!-- 修改业务账号成功 -->
+			<result name="updateSuccess" type="redirectAction">
+				business_find
+			</result>
+			
+			<!-- 是否删除成功，异步传输 -->
+			<result name="isDeleteSuccess" type="json">
+				<param name="root">isDeleteSuccess</param>
+			</result>
+			
+			<!-- 是否暂停成功，异步传输 -->
+			<result name="isPauseSuccess" type="redirectAction">
+				business_find
+			</result>
+			
+			<!-- 是否开通成功，异步传输 -->
+			<result name="isStartSuccess" type="redirectAction">
+				business_find
+			</result>
+			
+			<!-- 检查某业务账号对应的账户账号是否处于开通或删除状态 -->
+			<result name="checkAccountPauseOrDeleteSuccess" type="json">
+				<param name="root">isAccountPauseOrDelete</param>
+			</result>
+			
+			<!-- 错误 -->
+			<result name="error">
+				/WEB-INF/main/error.jsp
+			</result>
+			 
+		</action>
+	</package>
+</struts>

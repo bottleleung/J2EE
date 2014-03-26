@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+	<package name="login" namespace="/login" extends="struts-default">
+		<action name="login_*" class="loginAction" method="{1}">
+			<!-- 跳回登录界面 -->
+			<result name="toLogin">
+				/WEB-INF/main/login.jsp
+			</result>
+			
+			<!-- 验证码 -->
+			<result name="createCheckCodeImgSuccess" type="stream">
+				<param name="inputName">checkCodeImgStream</param>
+			</result>
+			
+			<!-- 登录成功 -->
+			<result name="loginSuccess" type="redirectAction">
+				<param name="namespace">
+					/common
+				</param>
+				<param name="actionName">
+					common_toIndex
+				</param>
+			</result>
+			
+			<!-- 登录失败 -->
+			<result name="loginFail">
+				/WEB-INF/main/login.jsp
+			</result>
+			
+			<!-- 错误 -->
+			<result name="error">
+				/WEB-INF/main/error.jsp
+			</result>
+		</action>
+	</package>
+</struts>

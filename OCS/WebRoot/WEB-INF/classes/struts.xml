@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	
+	<!-- 导入公共的配置 -->
+	<include file="struts-common.xml"/>
+	<!-- 导入资费模块 -->
+	<include file="struts-cost.xml"/>
+	<!-- 导入登录模块 -->
+	<include file="struts-login.xml"/>
+	<!-- 导入账户账号模块 -->
+	<include file="struts-account.xml"/>
+	<!-- 导入业务账号模块 -->
+	<include file="struts-business.xml"/>
+	<!-- 导入角色管理模块 -->
+	<include file="struts-role.xml" />
+	<!-- 导入用户模块 -->
+	<include file="struts-user.xml" />
+</struts>

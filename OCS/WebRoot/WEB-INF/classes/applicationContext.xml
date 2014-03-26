@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  - Application context definition for JPetStore's business layer.
+  - Contains bean references to the transaction manager and to the DAOs in
+  - dataAccessContext-local/jta.xml (see web.xml's "contextConfigLocation").
+  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context"   
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+		 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 开启扫描组件 -->
+	<context:component-scan base-package="com.ocs.*"></context:component-scan>
+		
+	<!-- 导入公共模块 -->
+	<import resource="commonContext.xml" />
+	<!-- 导入资费模块 -->
+    <import resource="costContext.xml" />
+    <!-- 导入业务账号模块 -->
+    <import resource="businessContext.xml" />
+    <!-- 导入账户账号模块 -->
+    <import resource="accountContext.xml" />
+    <!-- 导入登录模块 -->
+    <import resource="loginContext.xml" />
+    <!-- 导入角色管理模块 -->
+    <import resource="roleContext.xml" />
+    <!-- 导入用户管理模块 -->
+    <import resource="userContext.xml" />
+    	
+	<!-- 配置连接池 -->
+	<bean id ="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver" value="oracle.jdbc.driver.OracleDriver"></property>	
+		<property name="driverUrl" value="jdbc:oracle:thin:scott/lwt0757020ILU@127.0.0.1:1521:orcl"></property>	
+		<property name="user" value="scott"></property>
+		<property name="password" value="lwt0757020ILU"></property>
+	
+		<property name="minimumConnectionCount" value="2"></property>
+		<property name="maximumConnectionCount" value="12"></property>
+	</bean>	
+	
+	<!-- 注入连接池 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+   		<constructor-arg ref="dataSource" />
+	</bean>		
+</beans>
