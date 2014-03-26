@@ -3,8 +3,8 @@
 ###   开发平台：Linux
 ###   责任描述：登录模块、公共模块、角色管理模块、用户管理模块、资费管理模块、账户账号模块和业务账号模块的前端和后端开发
 ###   技术要点：
-    前端技术——html+css+javascript+jQuery+AJAX
-    后端技术——spring+struts+java+jdbc+jsp
+前端技术——html+css+javascript+jQuery+AJAX
+后端技术——spring+struts+java+jdbc+jsp
 ###   项目描述：
 模拟电信公司的unix服务器的出租业务而设计的子系统，实现给电信公司的工作人员进行管理客户信息、
 业务信息等功能。前端基于html+css进行布局，并基于jQuery框架编写脚本，另外，还使用了AJAX进行异
